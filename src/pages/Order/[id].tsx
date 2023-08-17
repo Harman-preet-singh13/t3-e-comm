@@ -103,8 +103,6 @@ const OrderPage: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = 
                                 </div>
                             </div>
                             :
-
-
                             <div>
                                 {
                                     details_available

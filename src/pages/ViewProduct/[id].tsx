@@ -9,7 +9,8 @@ import { AiOutlineRight } from "react-icons/ai";
 import Head from "next/head";
 import toast, { Toaster } from 'react-hot-toast';
 import { api } from "~/utils/api";
-import { boolean } from "zod";
+import { useSession } from "next-auth/react";
+import { useEffect, useMemo, useState } from "react";
 
 
 
@@ -17,17 +18,26 @@ const ViewProductPage: NextPage<InferGetServerSidePropsType<typeof getStaticProp
     id,
 }) => {
 
+    const session = useSession()
+    
+    const [isClinet, setIsClinet] = useState(false)
+
+    useEffect(() => {
+        setIsClinet(true)
+    }, [])
+
     const product = productData.find((product) => product.id === id)
 
 
     const create_wishlist = api.manager.createWishlist.useMutation({
         onSuccess: (data) => {
 
-            if('alreadyInWishlist' in data){
+            if ('alreadyInWishlist' in data) {
                 toast.error("Product is already in Wishlist")
             } else {
                 toast.success("Added to Wishlist")
             }
+
         }
     })
 
@@ -35,8 +45,12 @@ const ViewProductPage: NextPage<InferGetServerSidePropsType<typeof getStaticProp
 
         if (product?.id) {
             create_wishlist.mutate({ product_id: product.id, product_title: product.title, product_image: product.image });
-            
+
         }
+    }
+
+    function toastHandlerUnauth() {
+        toast.error("Your are not logged in...")
     }
 
     return (
@@ -100,30 +114,48 @@ const ViewProductPage: NextPage<InferGetServerSidePropsType<typeof getStaticProp
                         Buy Now
                     </Link>
 
-                    <button
-                        onClick={toastHandler}
-                        className="bg-transparent hover:bg-green-500 text-green-600 font-semibold hover:text-white mb-1 py-1 px-2 border border-green-600 hover:border-transparent rounded"
+                    {session.status !== "authenticated"
+                        ? (
+                            <div>
+                                <button
+                                    onClick={toastHandlerUnauth}
+                                    className="bg-transparent hover:bg-green-500 text-green-600 font-semibold hover:text-white mb-1 py-1 px-2 border border-green-600 hover:border-transparent rounded"
+                                >
+                                    Add to Wishlist
+                                </button>
+                                
+                                    <Toaster />
+                                
+                            </div>
+                        ) :
+                        <div>
+                            <button
+                                onClick={toastHandler}
+                                className="bg-transparent hover:bg-green-500 text-green-600 font-semibold hover:text-white mb-1 py-1 px-2 border border-green-600 hover:border-transparent rounded"
+                            >
+                                Add to Wishlist
+                            </button>
+                                <Toaster />
+                        </div>
+                    }
 
-                    >
-                        Add to Wishlist
-                    </button>
-                    <Toaster />
                 </div>
                 <hr />
                 <div className=" mt-10 text-center">
                     <h1 className=" text-xl font-bold">
-                        Most Popular items...
+                       Popular Products...
                     </h1>
-                    {getRandowProducts()}
+                    {/* hydration error */}
+                    {isClinet ? getRandomProducts(): 'never render'}
                 </div>
             </div>
         </div>
-
     )
 }
 
-function getRandowProducts() {
+function getRandomProducts() {
     const randomProducts = []
+    
     const shuffledProducts = productData.slice().sort(() => 0.5 - Math.random())
 
     for (let i = 0; i < 4; i++) {
