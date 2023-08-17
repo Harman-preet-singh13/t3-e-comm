@@ -5,7 +5,7 @@ import {
   type NextAuthOptions,
   type DefaultSession,
 } from "next-auth";
-import GITHUBProvider from "next-auth/providers/GITHUB";
+import GITHUBProvider from "next-auth/providers/github"
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
 
