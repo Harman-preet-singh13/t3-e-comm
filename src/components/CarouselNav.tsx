@@ -45,19 +45,20 @@ export default function CarouselNav() {
     ]
 
     return (
-        <Carousel>
+        <div className=" max-w-[1024px] mx-auto ">
+        <Carousel  navButtonsAlwaysVisible={true} fullHeightHover={true}>
             {
                 items.map((item) => {
                     return (
-                        <div className="flex my-5 md:mx-48 shadow-lg rounded-2xl">
-                            <div className="w-full max-h-72">
+                        <div key={item.id} className="flex justify-evenly my-5 ">
+                            <div className="">
                                 <img
                                     src={item.image}
                                     alt={item.title}
-                                    className=" lg:w-56"
+                                    className="rounded-2xl max-w-[150px] md:max-w-[200px]"
                                 />
                             </div>
-                            <div key={item.id}>
+                            <div className="max-w-[200px]">
                                 <h1 className=" font-semibold text-lg ">
                                     {item.title}
                                 </h1>
@@ -81,6 +82,7 @@ export default function CarouselNav() {
                 })
             }
 
-        </Carousel>
+        </Carousel> 
+    </div>
     );
 }

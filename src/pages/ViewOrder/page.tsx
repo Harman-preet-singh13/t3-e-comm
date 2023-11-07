@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import React, { useState } from 'react'
-import NavBar from '~/components/Navbar'
 import { api } from '~/utils/api'
 import { BiArrowBack } from "react-icons/bi";
 import { useRouter } from 'next/router';
@@ -77,7 +76,7 @@ export default function page() {
                     T3-Ecomm- Order
                 </title>
             </Head>
-            <NavBar />
+           
             <div className=" container mx-auto">
                 <div className="mx-5 md:mx-10">
                     <div className="">

@@ -2,7 +2,6 @@ import { GetStaticPaths, GetStaticPropsContext, InferGetServerSidePropsType, Nex
 import productData from "../../components/Products.json"
 import { ssgHelper } from "~/server/api/ssgHelper";
 import Head from "next/head";
-import NavBar from "~/components/Navbar";
 import Link from "next/link";
 import { BiArrowBack } from "react-icons/bi";
 import { useRouter } from "next/router";
@@ -66,7 +65,7 @@ const OrderPage: NextPage<InferGetServerSidePropsType<typeof getStaticProps>> = 
                     {`T3-Ecomm- ${product?.title}`}
                 </title>
             </Head>
-            <NavBar />
+           
             <div className=" container mx-auto">
                 <div className="mx-5 md:mx-10">
                     <div className="">

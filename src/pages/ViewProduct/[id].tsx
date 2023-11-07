@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticPropsContext, InferGetServerSidePropsType, NextPage } from "next";
 import { ssgHelper } from "~/server/api/ssgHelper";
 import productData from "../../components/Products.json"
-import NavBar from "~/components/Navbar";
 import Rating from '@mui/material/Rating';
 import { BiArrowBack } from "react-icons/bi"
 import Link from "next/link";
@@ -61,7 +60,7 @@ const ViewProductPage: NextPage<InferGetServerSidePropsType<typeof getStaticProp
                     {`T3-Ecomm- ${product?.title}`}
                 </title>
             </Head>
-            <NavBar />
+           
             <div className=" container mx-auto">
                 <div className="">
                     <Link

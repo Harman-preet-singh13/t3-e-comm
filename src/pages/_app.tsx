@@ -3,6 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
+import NavBar from "~/components/Navbar";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -10,7 +11,21 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
+      <NavBar />
       <Component {...pageProps} />
+      <p className="text-center my-5">
+        {" "}
+        <a
+          href="https://www.harmanpreetsingh.me/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Created by{" "}
+          <span className="text-blue-500 hover:underline">
+            Harmanpreet Singh
+          </span>
+        </a>
+      </p>
     </SessionProvider>
   );
 };

@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --fc-a-blue:hsl(233, 8%, 79%);
+    --fc-sec-blue:hsl(236, 13%, 42%);
+  
+    --fc-sec-heading:hsl(35, 77%, 62%);
+    --fc-sec-nav:hsl(5, 85%, 63%);
+  
+    --bg-c-white: hsl(36, 100%, 99%);
+    --bg-c-blue:hsl(240, 100%, 5%);
+  
+    --fs-heading:20px;
+    --fs-subheading:16px;
+    --fs-para:12px;
+  
+  
+    --fw-400:400;
+    --fw-500:500;
+    --fw-700:700;
+    --fw-800:800;
+  
+  }
+  
+  
+
+  
+  .filter-heading{
+    font-size: 24px;
+    color:var(--bg-c-blue);
+    font-weight: var(--fw-500);
+  }
+  
+  .product-heading-big{
+    font-size: var(--fs-subheading);
+    color:var(--bg-c-blue);
+  }
+  
+  .product-heading-big:hover{
+    color:var(--fc-sec-nav);
+    cursor: pointer;
+  }
+  
+  
+  .product-price{
+    font-size: var(--fs-heading);
+    color:var(--bg-c-blue);
+  }
+  
+  .filter-container{
+    font-size: var(--fs-subheading);
+    color:var(--bg-c-blue);
+  }
+  
+  .filter-item{
+    border: 1px solid #f5f5f5;
+    border-radius: 5px;
+    padding:2px;
+  }
+  
+  .filter-item:hover{
+    border: 1px solid hsl(35, 77%, 62%);
+  }
+  

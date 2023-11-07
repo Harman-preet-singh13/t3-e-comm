@@ -1,6 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { GiHamburgerMenu } from "react-icons/gi"
-import { AiOutlineClose } from "react-icons/ai"
+import { AiOutlineClose,AiOutlineSearch } from "react-icons/ai"
 import { VscSignIn, VscSignOut } from "react-icons/vsc"
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io"
 import { useState } from "react";
@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useRouter } from "next/router";
-import SearchBar from "./SearchBar";
 
 export default function NavBar() {
 
@@ -31,6 +30,14 @@ export default function NavBar() {
 
 
     const router = useRouter()
+    const isSearchPage = router.pathname === "/Search/page";
+
+    const serchPageHandler = () => {
+
+        router.push(`/Search/page`)
+
+        console.log("order")
+    }
 
     const orderhandler = () => {
 
@@ -48,8 +55,8 @@ export default function NavBar() {
     return (
 
         <nav className="w-full bg-gray-800 shadow">
-            <div className=" justify-around px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
-                <div>
+            <div className="px-4 mx-auto lg:max-w-7xl md:items-center md:flex">
+                <div className="grow">
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
 
                         <Link href="/">
@@ -75,10 +82,16 @@ export default function NavBar() {
                         </div>
                     </div>
                 </div>
-                <div className="flex-grow">
-                    <SearchBar />
+                <div className="mx-10">
+                    <Link
+                    
+                    href={isSearchPage ? "/Search/page" : "/Search/page"}
+                    className="flex justify-between bg-transparent hover:bg-blue-500 text-blue-100 font-semibold hover:text-white py-2 px-4 border border-blue-200 hover:border-transparent rounded"
+                    >
+                        Search<span className="text-xl"><AiOutlineSearch /></span>
+                    </Link>
                 </div>
-                <div>
+                <div className="">
                     <div
                         className={` justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? 'block' : 'hidden'
                             }`}
